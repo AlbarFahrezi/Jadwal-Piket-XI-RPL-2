@@ -1,0 +1,215 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --card-bg-color: rgba(255, 255, 255, 0.1);
+    --card-border-color: rgba(255, 255, 255, 0.2);
+    --text-color: #f0f0f0;
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --backdrop-filter: blur(10px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.background-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.background-bubbles .bubble {
+    position: absolute;
+    bottom: -150px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: bubble-up 15s infinite ease-in;
+    box-shadow: var(--shadow);
+}
+.background-bubbles .bubble:nth-child(1) { left: 10%; width: 50px; height: 50px; animation-duration: 12s; }
+.background-bubbles .bubble:nth-child(2) { left: 20%; width: 25px; height: 25px; animation-duration: 10s; animation-delay: 2s; }
+.background-bubbles .bubble:nth-child(3) { left: 35%; width: 70px; height: 70px; animation-duration: 14s; }
+.background-bubbles .bubble:nth-child(4) { left: 50%; width: 45px; height: 45px; animation-duration: 11s; animation-delay: 1s; }
+.background-bubbles .bubble:nth-child(5) { left: 65%; width: 80px; height: 80px; animation-duration: 16s; animation-delay: 3s; }
+.background-bubbles .bubble:nth-child(6) { left: 80%; width: 30px; height: 30px; animation-duration: 13s; }
+.background-bubbles .bubble:nth-child(7) { left: 90%; width: 60px; height: 60px; animation-duration: 15s; animation-delay: 2.5s; }
+
+@keyframes bubble-up {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease-out;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5em;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+p {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 10px 0 0;
+}
+
+.schedule-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.day-card {
+    background: var(--card-bg-color);
+    backdrop-filter: var(--backdrop-filter);
+    border-radius: 20px;
+    border: 1px solid var(--card-border-color);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.day-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 45px rgba(31, 38, 135, 0.5);
+}
+
+.day-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.day-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+}
+
+.member-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.member-list li {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.member-list li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.member-list li::before {
+    content: '✨';
+    margin-right: 15px;
+    font-size: 1.2em;
+    animation: sparkle 1s infinite;
+}
+
+.highlight-today {
+    border: 2px solid #fff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+    position: relative;
+    z-index: 2;
+    animation: shine 2s infinite;
+}
+
+.highlight-today::before {
+    content: '🎉 HARI INI 🎉';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffb86c;
+    color: #333;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+    white-space: nowrap;
+    animation: pop-in 0.5s ease-out;
+}
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes sparkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+@keyframes shine {
+    0% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); }
+    50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 10px #ffb86c; }
+    100% { box-shadow: 0 0 25px rgba(255, 255, 255, 0.7); }
+}
+@keyframes pop-in { from { transform: translateX(-50%) scale(0.5); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5em; }
+    p { font-size: 1em; }
+    .day-card { padding: 20px; }
+    .day-title { font-size: 1.8em; }
+    .highlight-today::before { top: -10px; font-size: 0.8em; }
+}
